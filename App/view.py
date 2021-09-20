@@ -50,7 +50,7 @@ catalog = None
 
 def initCatalog():
     """
-    Inicializa el catalogo
+    Inicializa el catalogo o
     """
     return controller.initCatalog(TipoEstructura)
 
