@@ -61,9 +61,38 @@ def newCatalog(estructuraDatos):
 # Funciones para agregar informacion al catalogo
 
 # Funciones para creacion de datos
+def AddArtFecha(art, fechai, fechaf, Lista):
+    if cmpArtworkByDateAcquiredSolo(art, fechai, fechaf):
+            lt.addLast(Lista, art)
+    
+    
 
 # Funciones de consulta
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
+def cmpArtworkByDateAcquired(artwork1, artwork2):
+                    # Devuelve verdadero (True) si el 'DateAcquired' de artwork1 es menores que el de artwork
+    artwork1a = (artwork1['DateAcquired']).split('-')
+    artwork2a = (artwork2['DateAcquired']).split('-')
+    if float(artwork1a[0]) == float(artwork2a[0]):
+        if float(artwork1a[1]) == float(artwork2a[1]):
+            return (float(artwork1a[2]) < float(artwork2a[2]))
+                
+        else:
+            return (float(artwork1a[1]) < float(artwork2a[1]))
+
+    else:
+        return (float(artwork1a[0]) < float(artwork2a[0]))
+
+def cmpArtworkByDateAcquiredSolo(artwork, fechai, fechaf):
+    print(artwork)
+    artworka = (artwork['DateAcquired']).split('-')
+    print(artworka)
+    return (float(artworka[0]) >= fechai) and (float(artworka[0]) <= fechaf)
+   
+
 # Funciones de ordenamiento
+
+def Organizar(lista):
+    return sa.sort(lista, cmpArtworkByDateAcquired)

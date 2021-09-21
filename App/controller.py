@@ -19,7 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
-
+from DISClib.ADT import list as lt
 import config as cf
 import model
 import csv
@@ -64,14 +64,13 @@ def loadArtist(catalog):
     for artist in input_file:
         model.addArtist(catalog, artist)
 
+#Requerimiento 2
+def Req2(catalog, fechai, fechaf):
+    Lista = lt.newList()
+    for art in catalog['Art']:
+        model.AddArtFecha(art, fechai, fechaf, Lista)
+    
+    return model.Organizar(Lista)
 
 
-
-
-# Inicialización del Catálogo de libros
-
-# Funciones para la carga de datos
-
-# Funciones de ordenamiento
-
-# Funciones de consulta sobre el catálogo
+    
