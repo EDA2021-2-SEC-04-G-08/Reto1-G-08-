@@ -71,6 +71,10 @@ def AddArtFecha(art, fechai, fechaf, Lista):
 
 # Funciones de consulta
 
+def escompra(artwork):
+    if artwork['CreditLine'] == 'Purchase':
+        return True
+
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 def cmpArtworkByDateAcquired(artwork1, artwork2):

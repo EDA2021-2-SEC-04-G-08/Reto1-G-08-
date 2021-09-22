@@ -67,14 +67,15 @@ def loadArtist(catalog):
 #Requerimiento 2
 def Req2(catalog, fechai, fechaf):
     Lista = lt.newList()
+    Compras = 0
     for keys in catalog['Art']:   
          listaArte = catalog['Art'][keys]
          if type(listaArte) == list:
             for Artworks in listaArte:
                 NewLista = model.AddArtFecha(Artworks, fechai, fechaf, Lista)
-
-    
-    return model.Organizar(NewLista)
+                if model.escompra(Artworks):
+                    Compras += 1
+    return ((model.Organizar(NewLista)), (lt.size(NewLista)), Compras, )
 
 
     

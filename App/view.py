@@ -92,7 +92,11 @@ while True:
         input2 = int(input('Ingrese la fecha final '))
         Resultado = (controller.Req2(catalog, input1, input2))
         print('La lista organizada es: ')
-        print(Resultado)
+        print(Resultado[0])
+        print('El numero total de obras en el rango es: ')
+        print(Resultado[1])
+        print('El total de obras en el rango adquiridas por compra es: ')
+        print(Resultado[2])
     else:
         sys.exit(0)
 sys.exit(0)
