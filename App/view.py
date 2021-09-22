@@ -88,9 +88,11 @@ while True:
         print('Ultimos 3 artistas: ') #+ str(lt.size(catalog[''])))
         print('Ultimas 3 obras ' ) #str(lt.size(catalog[''])))
     elif int(inputs[0]) == 3:
-        input1 = input('Ingrese la fecha inicial ')
-        input2 = input('Ingrese la fecha final ')
-        print(controller.Req2(catalog, int(input1), int(input2)))
+        input1 = int(input('Ingrese la fecha inicial '))
+        input2 = int(input('Ingrese la fecha final '))
+        Resultado = (controller.Req2(catalog, input1, input2))
+        print('La lista organizada es: ')
+        print(Resultado)
     else:
         sys.exit(0)
 sys.exit(0)

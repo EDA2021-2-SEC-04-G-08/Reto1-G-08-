@@ -37,8 +37,7 @@ los mismos.
 def addArt(catalog, artwork):
 
     lt.addLast(catalog['Art'], artwork)
-    # Se obtienen los autores del libro
-   #artist = artwork['artist'].split(",")
+
   
 
 def addArtist(catalog, artistname):
@@ -46,12 +45,13 @@ def addArtist(catalog, artistname):
     lt.addLast(catalog['Artist'], artistname)
 
 def newCatalog(estructuraDatos):
+    
 
     catalog = {'Art': None,
                'Artist': None,}
 
-    catalog['Art'] = lt.newList()
-    catalog['Artist'] = lt.newList()
+    catalog['Art'] = lt.newList(estructuraDatos)
+    catalog['Artist'] = lt.newList(estructuraDatos)
  
 
     return catalog
@@ -64,6 +64,8 @@ def newCatalog(estructuraDatos):
 def AddArtFecha(art, fechai, fechaf, Lista):
     if cmpArtworkByDateAcquiredSolo(art, fechai, fechaf):
             lt.addLast(Lista, art)
+    return Lista
+            
     
     
 
@@ -86,10 +88,10 @@ def cmpArtworkByDateAcquired(artwork1, artwork2):
         return (float(artwork1a[0]) < float(artwork2a[0]))
 
 def cmpArtworkByDateAcquiredSolo(artwork, fechai, fechaf):
-    print(artwork)
     artworka = (artwork['DateAcquired']).split('-')
-    print(artworka)
-    return (float(artworka[0]) >= fechai) and (float(artworka[0]) <= fechaf)
+    if artworka[0] != '':
+        return (int(artworka[0]) >= int(fechai)) and (int(artworka[0]) <= int(fechaf))
+    else: return False
    
 
 # Funciones de ordenamiento
