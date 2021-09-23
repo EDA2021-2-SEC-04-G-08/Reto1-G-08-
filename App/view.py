@@ -43,10 +43,9 @@ def printMenu():
     print("5- Clasificar las obras por la nacionalidad de sus creadores")
     print("6- Transportarcobras de un departamento ")
     print("7- Proponer una nueva exposición en el museo")
-    
+    print("0- Salir")
 
 catalog = None
-
 
 def initCatalog():
     """
@@ -61,7 +60,7 @@ def loadData(catalog):
 """
 Menu principal
 """
-TipoEstructura = 'SINGLE_LINKED'
+TipoEstructura= "SINGLE_LINKED"
 while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
@@ -78,8 +77,7 @@ while True:
             #Cargar como Linked List
             TipoEstructura = 'SINGLE_LINKED'
             print("Se ha configurado como Linked List")
-            
-            
+                
         print("Cargando información de los archivos ....")
         catalog = initCatalog()
         loadData(catalog)
@@ -117,6 +115,44 @@ while True:
         print(lista['first']['next']['next']['next']['next']['next']['next']['next']['info'])
         print(lista['first']['next']['next']['next']['next']['next']['next']['next']['next']['info'])
         print(lista['first']['next']['next']['next']['next']['next']['next']['next']['next']['next']['info'])
+
+    elif int(inputs[0]) == 2:
+        print("Ingrese año inicial: ")
+        inicial= int(input())
+        print("Ingrese año final: ")
+        final= int(input())
+        print ("La cantidad de artistas en dicho rango son: " + str(controller.conteo_artistas(catalog['Artist'], inicial, final)))
+        print ("\nLos tres primeros artistas son: \n")
+        primeros= controller.primeros_tres(catalog['Artist'], inicial, final)
+        for i in lt.iterator(primeros):
+            print(i['DisplayName'],i['BeginDate'], i['Nationality'], i['Gender'])
+        print ("\nLos tres últimos artistas son: \n")
+        ultimos= controller.ultimos_tres(catalog['Artist'], inicial, final)
+        for i in lt.iterator(ultimos):
+            print(i['DisplayName'],i['BeginDate'], i['Nationality'], i['Gender'])
+    
+    elif int(inputs[0]) == 4:
+        print("Ingrese nombre del artista: ")
+        nombre_artista= str(input())
+        lista_respuesta= controller.get_obras(catalog, nombre_artista)
+        print("El total de obras de " + nombre_artista + " es: " + str(lt.getElement(lista_respuesta, 1)))
+        print("El total de técnicas utilizadas por " + nombre_artista + " fue: " + str(lt.getElement(lista_respuesta, 2)))
+        print("La técnica más utilizada por " + nombre_artista + " fue: " + str(lt.getElement(lista_respuesta, 3)))
+        lista_obras= lt.getElement(lista_respuesta, 4)
+        for obra in lt.iterator(lista_obras):
+            print("------------------------------------------------")
+            print("\nTítulo: " + obra['Title'])
+            print("\nAño de la obra: " + obra['Date'])
+            print("\nTécnica: " + obra['Medium'])
+            print("\nDimensiones: " + obra['Dimensions'])
+            print("\n")
+    """
+    elif int(inputs[0]) == 6:
+        print("Ingrese nombre del departamento: ")
+        nombre_departamento= str(input())
+        lista_respuesta_departamento= controller.get_info_transporte(catalog['Art'], nombre_departamento)
+"""
     else:
         sys.exit(0)
 sys.exit(0)
+
