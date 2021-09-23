@@ -28,6 +28,7 @@
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import mergesort as ms
 assert cf
 
 """
@@ -71,12 +72,51 @@ def AddArtFecha(art, fechai, fechaf, Lista):
 
 # Funciones de consulta
 
+
 def escompra(artwork):
     if artwork['CreditLine'] == 'Purchase':
         return True
 
+def verID(catalog):
+    nacionalidades = []
+    nacionalidades1 = []
+    listanacionalidades = lt.newList()
+    for keys in catalog['Art']:   
+         listaArte = catalog['Art'][keys]
+         if type(listaArte) == list:
+            for Artworks in listaArte:
+                idx = Artworks['ConstituentID']
+                id = idx.strip('[],')
+                
+
+                for keysa in catalog['Artist']:   
+                    listaArtista = catalog['Artist'][keysa]
+                    if type(listaArtista) == list:
+                        for Artista in listaArtista:
+                            ida = Artista['ConstituentID']
+                            if(ida == id):
+                                nacion = Artista['Nationality']
+                                nacionalidades.append(nacion)
+                                    
+    for nacion in nacionalidades:
+        a = [nacion, nacionalidades.count(nacion)]
+
+        if nacion not in nacionalidades1:
+            lt.addLast(listanacionalidades, a)
+            nacionalidades1.append(nacion)
+        
+        
+    return listanacionalidades
+
+
+
 # Funciones utilizadas para comparar elementos dentro de una lista
 
+def cmpNumNacionalidad(nac1, nac2):
+    a = (nac1[1])
+    b = (nac2[1])
+    return int(a) > int(b)
+    
 def cmpArtworkByDateAcquired(artwork1, artwork2):
                     # Devuelve verdadero (True) si el 'DateAcquired' de artwork1 es menores que el de artwork
     artwork1a = (artwork1['DateAcquired']).split('-')
@@ -96,9 +136,14 @@ def cmpArtworkByDateAcquiredSolo(artwork, fechai, fechaf):
     if artworka[0] != '':
         return (int(artworka[0]) >= int(fechai)) and (int(artworka[0]) <= int(fechaf))
     else: return False
+
+
    
 
 # Funciones de ordenamiento
 
-def Organizar(lista):
+def OrganizarFecha(lista):
     return sa.sort(lista, cmpArtworkByDateAcquired)
+
+def OrganizarNacionalidad(lista):
+    return sa.sort(lista, cmpNumNacionalidad)

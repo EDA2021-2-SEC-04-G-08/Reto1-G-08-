@@ -75,7 +75,30 @@ def Req2(catalog, fechai, fechaf):
                 NewLista = model.AddArtFecha(Artworks, fechai, fechaf, Lista)
                 if model.escompra(Artworks):
                     Compras += 1
-    return ((model.Organizar(NewLista)), (lt.size(NewLista)), Compras, )
+    size = (lt.size(NewLista))
+
+    a = NewLista['first']['next']['next']['info']
+    ainfo = (('Titulo: '+ str(a['Title'])), ('Medio: '+ str(a['Medium'])), (' Fecha: '+ str(a['Date'])), ('Dimensiones: '+ str(a['Dimensions'])))
+    b = NewLista['first']['next']['info']
+    binfo = (('Titulo: '+ str(b['Title'])), ('Medio: '+ str(b['Medium'])), (' Fecha: '+ str(b['Date'])), ('Dimensiones: '+ str(b['Dimensions'])))
+    c = NewLista['first']['info']
+    cinfo = (('Titulo: '+ str(c['Title'])), ('Medio: '+ str(c['Medium'])), (' Fecha: '+ str(c['Date'])), ('Dimensiones: '+ str(c['Dimensions'])))
+    primeras3 = (ainfo, binfo, cinfo)
+
+    d = NewLista['last']['info']
+    ultima = ((('Titulo: '+ str(d['Title'])), ('Medio: '+ str(d['Medium'])), (' Fecha: '+ str(d['Date'])), ('Dimensiones: '+ str(d['Dimensions']))))
+
+    return ((model.OrganizarFecha(NewLista)), (size), Compras, primeras3, ultima )
+
+
+
+def Req4(catalog):
+    nacionalidades = model.verID(catalog)
+    list = model.OrganizarNacionalidad(nacionalidades)
+    return list
+    
+
+    
 
 
     
