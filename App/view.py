@@ -49,7 +49,7 @@ catalog = None
 
 def initCatalog():
     """
-    Inicializa el catalogo
+    Inicializa el catalogo o
     """
     return controller.initCatalog(TipoEstructura)
 
@@ -83,9 +83,39 @@ while True:
         loadData(catalog)
         print('Artistas cargados: ' + str(lt.size(catalog['Artist'])))
         print('Obras cargados: ' + str(lt.size(catalog['Art'])))
-        #print('Ultimos 3 artistas: ') #+ str(lt.size(catalog[''])))
-        #print('Ultimas 3 obras ' ) #str(lt.size(catalog[''])))
-        
+        print('Ultimos 3 artistas: ') #+ str(lt.size(catalog[''])))
+        print('Ultimas 3 obras ' ) #str(lt.size(catalog[''])))
+    elif int(inputs[0]) == 3:
+        input1 = int(input('Ingrese la fecha inicial '))
+        input2 = int(input('Ingrese la fecha final '))
+        Resultado = (controller.Req2(catalog, input1, input2))
+        #print('La lista organizada es: ')
+        #print(Resultado[0])
+        print('El numero total de obras en el rango es: ')
+        print(Resultado[1])
+        print('El total de obras en el rango adquiridas por compra es: ')
+        print(Resultado[2])
+        print('Las primeras 3 obras en orden cronologico')
+        print((Resultado[3])[0])
+        print((Resultado[3])[1])
+        print((Resultado[3])[2])
+        print('Las ultima obra en orden cronologico')
+        print(Resultado[4])
+
+    elif int(inputs[0]) == 5:
+        lista = controller.Req4(catalog)
+        print('Los 10 nacionalidades con más obras son: ')
+        print(lista['first']['info'])
+        print(lista['first']['next']['info'])
+        print(lista['first']['next']['next']['info'])
+        print(lista['first']['next']['next']['next']['info'])
+        print(lista['first']['next']['next']['next']['next']['info'])
+        print(lista['first']['next']['next']['next']['next']['next']['info'])
+        print(lista['first']['next']['next']['next']['next']['next']['next']['info'])
+        print(lista['first']['next']['next']['next']['next']['next']['next']['next']['info'])
+        print(lista['first']['next']['next']['next']['next']['next']['next']['next']['next']['info'])
+        print(lista['first']['next']['next']['next']['next']['next']['next']['next']['next']['next']['info'])
+
     elif int(inputs[0]) == 2:
         print("Ingrese año inicial: ")
         inicial= int(input())
@@ -122,4 +152,7 @@ while True:
         nombre_departamento= str(input())
         lista_respuesta_departamento= controller.get_info_transporte(catalog['Art'], nombre_departamento)
 """
+    else:
+        sys.exit(0)
+sys.exit(0)
 

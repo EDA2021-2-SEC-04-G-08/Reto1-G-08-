@@ -19,7 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
-
+from DISClib.ADT import list as lt
 import config as cf
 import model
 import csv
@@ -88,14 +88,41 @@ def get_obras(catalog, nombre_artista):
 def get_info_transporte(arte, nombre_departamento):
     return model.get_transporte(arte, nombre_departamento)
 
+#Requerimiento 2
+def Req2(catalog, fechai, fechaf):
+    Lista = lt.newList()
+    Compras = 0
+    for keys in catalog['Art']:   
+         listaArte = catalog['Art'][keys]
+         if type(listaArte) == list:
+            for Artworks in listaArte:
+                NewLista = model.AddArtFecha(Artworks, fechai, fechaf, Lista)
+                if model.escompra(Artworks):
+                    Compras += 1
+    size = (lt.size(NewLista))
+
+    a = NewLista['first']['next']['next']['info']
+    ainfo = (('Titulo: '+ str(a['Title'])), ('Medio: '+ str(a['Medium'])), (' Fecha: '+ str(a['Date'])), ('Dimensiones: '+ str(a['Dimensions'])))
+    b = NewLista['first']['next']['info']
+    binfo = (('Titulo: '+ str(b['Title'])), ('Medio: '+ str(b['Medium'])), (' Fecha: '+ str(b['Date'])), ('Dimensiones: '+ str(b['Dimensions'])))
+    c = NewLista['first']['info']
+    cinfo = (('Titulo: '+ str(c['Title'])), ('Medio: '+ str(c['Medium'])), (' Fecha: '+ str(c['Date'])), ('Dimensiones: '+ str(c['Dimensions'])))
+    primeras3 = (ainfo, binfo, cinfo)
+
+    d = NewLista['last']['info']
+    ultima = ((('Titulo: '+ str(d['Title'])), ('Medio: '+ str(d['Medium'])), (' Fecha: '+ str(d['Date'])), ('Dimensiones: '+ str(d['Dimensions']))))
+
+    return ((model.OrganizarFecha(NewLista)), (size), Compras, primeras3, ultima )
 
 
 
+def Req4(catalog):
+    nacionalidades = model.verID(catalog)
+    list = model.OrganizarNacionalidad(nacionalidades)
+    return list
+    
 
-# Inicialización del Catálogo de libros
+    
 
-# Funciones para la carga de datos
 
-# Funciones de ordenamiento
-
-# Funciones de consulta sobre el catálogo
+    
